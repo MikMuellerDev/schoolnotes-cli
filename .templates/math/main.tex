@@ -1,0 +1,91 @@
+\documentclass[ngerman, a4]{article}
+
+\usepackage{babel}
+\usepackage{graphicx}
+\usepackage{lipsum}
+
+% Color-related
+\usepackage{color}
+\usepackage{xcolor}
+\definecolor{_green}{HTML}{058e47}
+\definecolor{_red}{HTML}{8e0505}
+\definecolor{_blue}{HTML}{05578e}
+\definecolor{_yellow}{HTML}{ccbe00}
+\definecolor{_orange}{HTML}{e27304}
+
+%  Tabular-related 
+\usepackage{tabularx}
+
+% Figure-related
+\usepackage{wrapfig}
+\usepackage{sidecap}
+
+% FancyHDR
+\usepackage{fancyhdr}
+
+% Maths and symbols
+\usepackage{amsmath}
+\usepackage{siunitx}
+\usepackage{gensymb}
+
+% Plotting graphs
+\usepackage{pgfplots}
+% Custom commands
+\newcommand{\addpoint}[4][black]{
+    \addplot [
+        color=#1,
+        mark=#2,
+        only marks,
+    ]
+    coordinates {(#3)}
+    node[pin=#4:{$(#3)$}]{}
+    ;
+}
+\newcommand{\addpointc}[3][black]{
+    \addpoint[#1]{*}{#2}{#3}
+}
+
+
+% Fonts and formatting 
+\usepackage[no-math]{fontspec}
+\usepackage[autostyle]{csquotes}
+
+% Geometry
+\usepackage[a4paper,left=2cm,right=2cm,top=2cm,bottom=2.5cm]{geometry}
+\usepackage[pdfborder={0 0 0}]{hyperref}
+
+% Uncomment if enumerate should use a) b) c) ...
+% \renewcommand{\labelenumi}{\alph{enumi})}
+
+% Specify TabularX custom column types
+\newcolumntype{L}{X}
+\newcolumntype{C}{>{\centering\arraybackslash}X}
+\newcolumntype{R}{>{\raggedleft\arraybackslash}X}
+% Arraystretch so that tables have padding
+\renewcommand{\arraystretch}{1.5}
+
+% Itemize listings
+\renewcommand{\labelitemii}{$\circ$}
+\renewcommand{\labelitemiii}{$\vcenter{\hbox{\rule{.5ex}{.5ex}}}$}
+\renewcommand{\labelitemiv}{$\vcenter{\hbox{\rule{.5ex}{.5ex}}}$}
+
+% Customize used font to DejaVu Sans
+\setmainfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+% Remove Indent and add vspace to paragraphs
+\parindent0pt
+\setlength{\parskip}{7pt}
+
+% Specify pagestyle
+\pagestyle{fancy}
+
+% Specify FancyHDR parameters
+\lhead{\textbf{Mik Müller}}
+\chead{Titel}
+\rhead{\today}
+
+% Begin actual document
+\begin{document}
+\input{content.tex}
+\end{document}

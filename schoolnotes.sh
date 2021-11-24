@@ -49,6 +49,9 @@ if [ -n "$1" ]; then
             rm *.lof
             rm *.bbl
             rm *.bcf
+            rm *.script
+            rm *.dat
+            rm __latexindent_temp.tex
         ;;
         
         -b | --build | --compile)

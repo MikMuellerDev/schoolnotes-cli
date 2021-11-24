@@ -1,0 +1,77 @@
+\documentclass[ngerman, a4, 12pt, listof=totoc]{scrreprt}
+\usepackage[a4paper,left=3cm,right=3cm,top=2.5cm,bottom=3.5cm]{geometry}
+\usepackage{amsmath}
+\usepackage{siunitx}
+\usepackage{sidecap}
+\usepackage{gensymb}
+\usepackage{babel}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{lipsum}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{tabularx}
+\usepackage{wrapfig}
+\usepackage[pdfborder={0 0 0}]{hyperref}
+\usepackage[backend=biber,style=alphabetic,sorting=ynt]{biblatex}
+\usepackage[autostyle]{csquotes}
+\renewcommand{\labelenumi}{\alph{enumi})}
+\addbibresource{literatur.bib}
+
+% Not useful with Lua Latex
+% \usepackage[utf8]{inputenc}
+
+% Frage: wie man Code inserted
+
+% Mann kann parindent nutzen, um das Einrücken zu verhindern.
+% \parindent0pt
+
+
+\renewcommand\lstlistingname{Quelltext} % Change language of section name
+\lstset{ % General setup for the package
+    language=Python,
+    basicstyle=\small\sffamily,
+    numbers=left,
+    numberstyle=\small,
+    frame=tb,
+    tabsize=4,
+    columns=fixed,
+    showstringspaces=false,
+    showtabs=false,
+    keepspaces,
+    commentstyle=\color{red},
+    keywordstyle=\color{blue}
+}
+
+
+\titlehead{\begin{center} \includegraphics[width=3cm]{assets/icon.png} \end{center}}
+\title{\LaTeX \, Linux}
+\subtitle{Das beste Betriebssystem}
+\publishers{Mik Müller}
+
+\author{Linus Torvalds}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+% Man benutzt ein*, damit es nicht im Inhaltsverzeichnis auftaucht  
+% Geht auch mit \section \chapter \subsection
+
+\begin{abstract}
+    \section*{Abstract}
+    \subsection*{Lorem Ipsum}
+    \lipsum[1-5]
+\end{abstract}
+
+\tableofcontents
+
+\include{kapitel_1.tex}
+\include{kapitel_2.tex}
+\include{kapitel_3.tex}
+\include{kapitel_4.tex}
+
+\listoffigures
+\listoftables
+\printbibliography[heading=bibintoc,title={Literaturverzeichnis}]
+\end{document}

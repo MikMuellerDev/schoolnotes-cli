@@ -1,0 +1,66 @@
+\chapter{\LaTeX \, Tips}
+\section{Grundlagen der Textformatierung}
+\subsection{Textarten}
+
+\textbf{Fettgedruckter Text}\\
+\emph{Schräger Text}\\
+\vspace{1cm}
+\underline{Unterstrichen}\\
+{\large groß} \\
+{\Large größer} \\
+{\huge noch Größer} \\
+{\Huge noch noch Größer} \\
+
+
+
+\subsection{Umbrüche}
+Forcierter Zeilenumbruch
+\begin{verbatim}
+    \\
+\end{verbatim}
+Forcierter Seitenumbruch
+\begin{verbatim}
+    \newpage
+\end{verbatim}
+
+\subsection{Platzhalter und Abstände}
+lorem ipsum \, dolor simet amet\\
+lorem ipsum \quad dolor simet amet\\
+lorem ipsum \hspace{1cm} dolor simet amet\\
+lorem ipsum \vspace{1cm}\\
+dolor simet amet\\
+lorem ipsum \hfill dolor simet amet\\
+
+\newpage
+
+\section{Listen}
+\subsection{Ungeordnet}
+Liste 1
+\begin{itemize}
+    % \itemsep-0.1cm
+    \item[-] Item 1
+    \item[*] Item 2
+    \item[$\rightarrow$] Item 3
+    \item[$\triangle$] Item 4
+    \item[$\Rightarrow$] Item 5
+    \item[$x$] Item 6
+\end{itemize}
+Liste 2
+\begin{itemize}
+    \item Normales Item
+\end{itemize}
+Liste 3
+\subsection{Numeriert}
+\begin{enumerate}
+    \item Item
+    \item Item
+    \item Item
+    \item Item
+\end{enumerate}
+
+\section{Programmcode}
+\begin{lstlisting}
+    print("Hello World!")
+    for i in range(31415):
+        print("In Loop")
+\end{lstlisting}
