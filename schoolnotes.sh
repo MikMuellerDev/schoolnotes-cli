@@ -1,12 +1,5 @@
 #!/bin/bash
 
-echo -e "\033[1;34m"
-echo "___     _             _ _  _     _"
-echo "/ __| __| |_  ___  ___| | \| |___| |_ ___ ___"
-echo "\__ \/ _| ' \/ _ \/ _ \ | . / _ \  _/ -_|_--<"
-echo "|___/\__|_||_\___/\___/_|_|\_\___/\__\___/__/"
-echo -e "\033[0m"
-
 if [ -n "$1" ]; then
     case $1 in
         -i | --init)
@@ -23,9 +16,13 @@ if [ -n "$1" ]; then
                         cp -r /opt/schoolnotes/.templates/normal/* ./
                         echo -e "\033[1;32mSuccessfully initialised new Schoolnotes template for\033[0m \033[1;35mNotes.\033[0m"
                     ;;
-                    -c | --complete)
+                    -c | --complex)
                         cp -r /opt/schoolnotes/.templates/complex/* ./
                         echo -e "\033[1;32mSuccessfully initialised new Schoolnotes template for\033[0m \033[1;35mComplex Work.\033[0m"
+                    ;;
+                    -m | --math)
+                        cp -r /opt/schoolnotes/.templates/math/* ./
+                        echo -e "\033[1;32mSuccessfully initialised new Schoolnotes template for\033[0m \033[1;35mMath.\033[0m"
                     ;;
                     *)
                         echo -e "\033[1;31mPlease include a valid mode when using init.\nValid modes are:\n     -n | --normal\033[0m"
@@ -87,4 +84,10 @@ if [ -n "$1" ]; then
 else
     echo -e "\033[1;34mLaunching Schoolnotes in VsCode.\033[0m"
     code "$HOME/SchoolNotes"
+    echo -e "\033[1;34m"
+    echo "___     _             _ _  _     _"
+    echo "/ __| __| |_  ___  ___| | \| |___| |_ ___ ___"
+    echo "\__ \/ _| ' \/ _ \/ _ \ | . / _ \  _/ -_|_--<"
+    echo "|___/\__|_||_\___/\___/_|_|\_\___/\__\___/__/"
+    echo -e "\033[0m"
 fi

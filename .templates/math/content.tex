@@ -5,150 +5,90 @@
 \section*{Titel}
 
 % PLOT DEFINED BY COORDINATES
-\begin{tikzpicture}
-\begin{axis}[
-    width=15cm,
-    height=10cm,
-    title={Aufzugsgraph},
-    xlabel={Zeit in $s$},
-    ylabel={Geschwindigkeit in $\frac{m}{s}$},
-    xmin=0, xmax=10,
-    ymin=-3, ymax=3,
-    % xtick={0,2,4,6,8,10,12,14},
-    % ytick={0,1,2,-1,-2},
-    xtick distance=1,
-    ytick distance=1,
-    legend pos=north west,
-    xmajorgrids=true,
-    ymajorgrids=true,
-    grid style=dashed,
-]
-
-\addplot[
-    color=red,
-    % mark=square,
-    ]
-    coordinates {
-    (0,0)
-    (1,2)
-    (4,2)
-    (5,0)
-    (7,0)
-    (8,-2)
-    (9,-2)
-    (10,0)
-    };
-    \legend{$v_{Aufzug}$}
-    
-\end{axis}
-\end{tikzpicture}
-
-
-    \begin{tikzpicture}
-    \begin{axis}[
-        axis lines = left,
-        width=10cm,
-        % height=10cm,
-        title={Titel},
-        xlabel={$x$},
-        ylabel={$f(x)$},
-        % xmajorgrids=true,
-        % ymajorgrids=true,
-        % grid style=dashed,
-    ]
-    %Below the red parabola is defined
-    \addplot [
-        domain=-10:10, 
-        samples=100, 
-        color=red,
-    ]
-    {x^2};
-    \addlegendentry{$x^2$}
-    %Here the blue parabola is defined
-    \addplot [
-        domain=-10:10, 
-        samples=100, 
-        color=blue,
-        ]
-        {0.1*x^3};
-    \addlegendentry{$x^3$}
-
-
-    \addpointc{0,0}{95}
-    \addlegendentry{Schnittpunkt}
-
-    \addpointc{4,16}{290}
-    \addlegendentry{Anderer Punkt}
-
-    \end{axis}
-    \end{tikzpicture}
-
-
 % \begin{tikzpicture}
 %     \begin{axis}[
-%         x tick label style={
-%             /pgf/number format/1000 sep=},
-%         ylabel=Year,
-%         enlargelimits=0.05,
-%         legend style={at={(0.5,-0.1)},
-%         anchor=north,legend columns=-1},
-%         ybar interval=0.7,
-%     ]
-%     \addplot 
-%         coordinates {(2012,408184) (2011,408348)
-%              (2010,414870) (2009,412156)};
-%     \addplot 
-%         coordinates {(2012,388950) (2011,393007) 
-%             (2010,398449) (2009,395972)};
-%     \legend{Men,Women}
+%             width=15cm,
+%             height=10cm,
+%             title={Aufzugsgraph},
+%             xlabel={Zeit in $s$},
+%             ylabel={Geschwindigkeit in $\frac{m}{s}$},
+%             xmin=0, xmax=10,
+%             ymin=-3, ymax=3,
+%             % xtick={0,2,4,6,8,10,12,14},
+%             % ytick={0,1,2,-1,-2},
+%             xtick distance=1,
+%             ytick distance=1,
+%             legend pos=north west,
+%             xmajorgrids=true,
+%             ymajorgrids=true,
+%             grid style=dashed,
+%         ]
+
+%         \addplot[
+%             color=red,
+%             % mark=square,
+%         ]
+%         coordinates {
+%                 (0,0)
+%                 (1,2)
+%                 (4,2)
+%                 (5,0)
+%                 (7,0)
+%                 (8,-2)
+%                 (9,-2)
+%                 (10,0)
+%             };
+%         \legend{$v_{Aufzug}$}
+
 %     \end{axis}
-%     \end{tikzpicture}
-
-%     \begin{tikzpicture}
-%         \begin{axis}[
-%             title=Example using the mesh parameter,
-%             hide axis,
-%             colormap/cool,
-%         ]
-%         \addplot3[
-%             mesh,
-%             samples=50,
-%             domain=-8:8,
-%         ]
-%         {sin(deg(sqrt(x^2+y^2)))/sqrt(x^2+y^2)};
-%         \addlegendentry{\(\frac{sin(r)}{r}\)}
-%         \end{axis}
-%         \end{tikzpicture}
+% \end{tikzpicture}
 
 
-%         \begin{tikzpicture}
-%             \begin{axis}
-%                 [
-%                 view={60}{30},
-%                 ]
-%             \addplot3[
-%                 domain=0:5*pi,
-%                 samples = 60,
-%                 samples y=0,
-%             ]
-%             ({sin(deg(x))},
-%             {cos(deg(x))},
-%             {x});
-%             \end{axis}
-%             \end{tikzpicture}
+\begin{tikzpicture}
+    \begin{axis}[
+            axis lines = left,
+            width=10cm,
+            % height=10cm,
+            title={Titel},
+            xlabel={$x$},
+            ylabel={$f(x)$},
+            % xmajorgrids=true,
+            % ymajorgrids=true,
+            % grid style=dashed,
+        ]
+        %Below the red parabola is defined
+        \addplot [
+            domain=-10:10,
+            samples=100,
+            color=red,
+        ]
+        {x^2};
+        \addlegendentry{$x^2$}
+        %Here the blue parabola is defined
+        \addplot [
+            domain=-10:10,
+            samples=100,
+            color=blue,
+            colormap/cool,
+        ]
+        {0.1*x^3};
+        \addlegendentry{$x^3$}
 
-%                 \begin{tikzpicture}
-%                     \begin{axis}[
-%                         title=Hi Mik,
-%                         colormap/cool,
-%                     ]
-%                     \addplot3[
-%                         mesh,
-%                         samples=50,
-%                         domain=-42:42,
-%                     ]
-%                     {x^3};
-%                     \end{axis}
-%                     \end{tikzpicture}
 
+        \addpointc{0,0}{95}
+        \addlegendentry{Schnittpunkt}
+    \end{axis}
+\end{tikzpicture}
+
+% Begin Equasion
+\subsection*{Lösung}
+\begin{align*}
+     &                 & f(x) & = 0                 &  & |\,\text{Ansatz} \\
+     & \Leftrightarrow & 0    & = 4x^3+8x^3+16x^2+8 &  & |\,\text{:4}     \\
+     & \Leftrightarrow & 0    & = x^3+2x^3+4x^2+2   &  &                  \\
+\end{align*}
+% End Equasion
+
+% Begin Explaination
+\subsection*{Erklärung}
 
