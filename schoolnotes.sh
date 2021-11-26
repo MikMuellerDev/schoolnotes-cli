@@ -13,15 +13,15 @@ if [ -n "$1" ]; then
                 fi
                 case $2 in
                     -n | --normal)
-                        cp -r /opt/schoolnotes/.templates/normal/* ./
+                        cp -r /opt/schoolnotes/.templates/normal/* ./ || exit 1
                         echo -e "\033[1;32mSuccessfully initialised new Schoolnotes template for\033[0m \033[1;35mNotes.\033[0m"
                     ;;
                     -c | --complex)
-                        cp -r /opt/schoolnotes/.templates/complex/* ./
+                        cp -r /opt/schoolnotes/.templates/complex/* ./ || exit 1
                         echo -e "\033[1;32mSuccessfully initialised new Schoolnotes template for\033[0m \033[1;35mComplex Work.\033[0m"
                     ;;
                     -m | --math)
-                        cp -r /opt/schoolnotes/.templates/math/* ./
+                        cp -r /opt/schoolnotes/.templates/math/* ./ || exit 1
                         echo -e "\033[1;32mSuccessfully initialised new Schoolnotes template for\033[0m \033[1;35mMath.\033[0m"
                     ;;
                     *)
