@@ -22,7 +22,6 @@ init() {
 }
 
 clean() {
-    echo -e "\033[1;34mCleaning LaTeX junk files in current directory.\033[0m"
     rm -v -- *.aux 2> /dev/null
     rm -v -- *.fdb_latexmk 2> /dev/null
     rm -v -- *.fls 2> /dev/null
@@ -35,6 +34,7 @@ clean() {
     rm -v -- *.script 2> /dev/null
     rm -v -- *.dat 2> /dev/null
     rm __latexindent_temp.tex 2> /dev/null
+    echo -e "\033[1;34mCleaned LaTeX junk files in current directory.\033[0m"
 }
 
 build() {
