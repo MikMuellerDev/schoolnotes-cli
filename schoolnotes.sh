@@ -62,6 +62,32 @@ view() {
     fi
 }
 
+watch() {
+# run every interval in seconds
+timeinterval=2;
+
+# Main files and folders
+maindir='./'
+main="$maindir/main.tex"
+content="$maindir/content.tex"
+
+echo "Watching TEX files for changes"
+echo "Directory=\"$maindir\""
+
+chksum1=""
+while [[ true ]]; do
+    chksum2=`find $content $main -type f -printf "%T@ %p\n" | md5sum | cut -d " " -f 1`;
+    if [[ $chksum1 != $chksum2 ]] ; then 
+        build 'main.tex'
+        printf "Waiting for changes ...\n"
+        chksum1=$chksum2
+    fi
+    #echo "$chksum2 $chksum1";
+    sleep $timeinterval;
+done
+}
+
+
 if [ -n "$1" ]; then
     while test $# -gt 0; do
         case $1 in
@@ -106,6 +132,11 @@ if [ -n "$1" ]; then
             -e | --edit)
                 echo -e "\033[1;34mEditing notes in current directory.\033[0m"
                 code .
+                shift
+            ;;
+                -w | --watch)
+                echo -e "\033[1;34mWatching for filechanges in current directory.\033[0m"
+                watch
                 shift
             ;;
             -n | --new)
