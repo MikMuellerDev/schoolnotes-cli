@@ -39,6 +39,8 @@ clean() {
     rm -v -- *.dat 2> /dev/null
     rm -v -- *.bak0 2> /dev/null
     rm -v -- *.bak1 2> /dev/null
+    rm -v -- *.lol 2> /dev/null
+    rm -v -- *.listing 2> /dev/null
     rm __latexindent_temp.tex 2> /dev/null
     echo -e "\033[1;34mCleaned LaTeX junk files in current directory.\033[0m"
 }
@@ -81,6 +83,8 @@ watch() {
             build 'main.tex' 'silent'
             echo -e "Waiting for changes ..."
             chksum1=$chksum2
+            elif [ -f "main.aux" ]; then
+            clean
         fi
         #echo "$chksum2 $chksum1";
         sleep $timeinterval;

@@ -5,13 +5,15 @@
 \usepackage{lipsum}
 
 % Color-related
-\usepackage{color}
 \usepackage{xcolor}
+\usepackage{colortbl}
 \definecolor{_green}{HTML}{058e47}
 \definecolor{_red}{HTML}{8e0505}
 \definecolor{_blue}{HTML}{05578e}
 \definecolor{_yellow}{HTML}{ccbe00}
 \definecolor{_orange}{HTML}{e27304}
+
+\newcommand{\bluetext}[1]{\texttt{\color{_blue}{#1}}}
 
 %  Tabular-related 
 \usepackage{tabularx}
@@ -65,6 +67,8 @@
 
 % Specify pagestyle
 \pagestyle{fancy}
+
+\include{preamble.tex}
 
 % Specify FancyHDR parameters
 \lhead{\textbf{Mik Müller}}
