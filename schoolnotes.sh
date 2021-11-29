@@ -14,9 +14,13 @@ init() {
             cp -r /opt/schoolnotes/.templates/math/* ./ ||  { echo -e "\033[1;31mTemplates folder ist not valid, initialising failed.\033[0m" && exit 1; }
             echo -e "\033[1;32mSuccessfully initialised new Schoolnotes template for\033[0m \033[1;35mMath.\033[0m"
         ;;
+        i | info)
+            cp -r /opt/schoolnotes/.templates/informatik/* ./ ||  { echo -e "\033[1;31mTemplates folder ist not valid, initialising failed.\033[0m" && exit 1; }
+            echo -e "\033[1;32mSuccessfully initialised new Schoolnotes template for\033[0m \033[1;35mComputer C.\033[0m"
+        ;;
         *)
-            echo -e "\033[1;31mPlease provide a valid template name when using init.\nValid templates are:\n    n | normal\n    c | complex\n    m | math\033[0m"
-            exit 1
+            echo -e "\033[1;31mPlease provide a valid template name when using init.\033[0m\nValid templates are:\n    n | normal\n    c | complex\n    m | math\033[0m"
+            false
         ;;
     esac
 }
@@ -63,28 +67,28 @@ view() {
 }
 
 watch() {
-# run every interval in seconds
-timeinterval=2;
-
-# Main files and folders
-maindir='./'
-main="$maindir/main.tex"
-content="$maindir/content.tex"
-
-echo "Watching TEX files for changes"
-echo "Directory=\"$maindir\""
-
-chksum1=""
-while [[ true ]]; do
-    chksum2=`find $content $main -type f -printf "%T@ %p\n" | md5sum | cut -d " " -f 1`;
-    if [[ $chksum1 != $chksum2 ]] ; then 
-        build 'main.tex'
-        printf "Waiting for changes ...\n"
-        chksum1=$chksum2
-    fi
-    #echo "$chksum2 $chksum1";
-    sleep $timeinterval;
-done
+    # run every interval in seconds
+    timeinterval=2;
+    
+    # Main files and folders
+    maindir='./'
+    main="$maindir/main.tex"
+    content="$maindir/content.tex"
+    
+    echo "Watching TEX files for changes"
+    echo "Directory=\"$maindir\""
+    
+    chksum1=""
+    while [[ true ]]; do
+        chksum2=`find $content $main -type f -printf "%T@ %p\n" | md5sum | cut -d " " -f 1`;
+        if [[ $chksum1 != $chksum2 ]] ; then
+            build 'main.tex'
+            printf "Waiting for changes ...\n"
+            chksum1=$chksum2
+        fi
+        #echo "$chksum2 $chksum1";
+        sleep $timeinterval;
+    done
 }
 
 
@@ -125,16 +129,16 @@ if [ -n "$1" ]; then
                 shift
             ;;
             -r | --run)
-            build "main.tex" "silent"
-            view
-            shift
+                build "main.tex" "silent"
+                view
+                shift
             ;;
             -e | --edit)
                 echo -e "\033[1;34mEditing notes in current directory.\033[0m"
                 code .
                 shift
             ;;
-                -w | --watch)
+            -w | --watch)
                 echo -e "\033[1;34mWatching for filechanges in current directory.\033[0m"
                 watch
                 shift
@@ -156,7 +160,7 @@ if [ -n "$1" ]; then
                 fi
                 mkdir "$2"
                 cd "$2" || {  echo -e "\033[1;31mCreating $2 failed: Cd returned an error.\033[0m" && exit 1; }
-                init "$3" > /dev/null
+                init "$3" || { cd ".." &&  rm -rf "$2" && echo -e "\033[1;31mCreating $2 failed: init returned an error.\n\033[1;34mAll changes were reverted.\033[0m" && exit 1; }
                 build "main.tex" "silent"
                 # cd ..
                 echo -e "\033[1;32mSuccessfully created a new Schoolnotes project for\033[0m \033[1;35m$3.\033[0m"
