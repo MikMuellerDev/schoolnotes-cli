@@ -74,16 +74,12 @@ watch() {
     maindir='./'
     main="$maindir/main.tex"
     content="$maindir/content.tex"
-    
-    echo "Watching TEX files for changes"
-    echo "Directory=\"$maindir\""
-    
-    chksum1=""
+    chksum1=`find $content $main -type f -printf "%T@ %p\n" | md5sum | cut -d " " -f 1`;
     while [[ true ]]; do
         chksum2=`find $content $main -type f -printf "%T@ %p\n" | md5sum | cut -d " " -f 1`;
         if [[ $chksum1 != $chksum2 ]] ; then
-            build 'main.tex'
-            printf "Waiting for changes ...\n"
+            build 'main.tex' 'silent'
+            echo -e "Waiting for changes ..."
             chksum1=$chksum2
         fi
         #echo "$chksum2 $chksum1";
