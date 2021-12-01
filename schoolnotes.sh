@@ -49,12 +49,11 @@ build() {
     echo -e "\033[1;34mBuilding main.tex...\033[0m"
     mkdir out
     if [ "$2" = "silent" ]; then
-        lualatex  --halt-on-error --output-directory=out "$1" > /dev/null || { echo -e "\033[1;31mBuilding of $1 failed.\033[0m" && exit 1; }
+        lualatex  --halt-on-error "$1" > /dev/null || { echo -e "\033[1;31mBuilding of $1 failed.\033[0m" && exit 1; }
     else
-        lualatex  --halt-on-error --output-directory=out "$1" || { echo -e "\033[1;31mBuilding of $1 failed.\033[0m" && exit 1; }
+        lualatex  --halt-on-error "$1" || { echo -e "\033[1;31mBuilding of $1 failed.\033[0m" && exit 1; }
     fi
-    mv out/*.pdf ./ -f  || { echo -e "\033[1;31mBuild failed: Transfering PDF failed.\033[0m" && exit 1; }
-    rm -rf out
+    clean
     echo -e "\033[1;32mBuilding of $1 finished.\033[0m"
 }
 
