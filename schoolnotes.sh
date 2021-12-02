@@ -1,5 +1,13 @@
 #!/bin/bash
 
+maketitle() {
+    echo -e "$1"
+    echo -e "$2"
+    
+    read filename ;
+    sed -i 's/ /_/g' "$filename"
+}
+
 init() {
     case "$1" in
         n | normal)
@@ -134,7 +142,7 @@ if [ -n "$1" ]; then
             ;;
             -e | --edit)
                 echo -e "\033[1;34mEditing notes in current directory.\033[0m"
-                code .
+                code . 2> /dev/null || codium .
                 shift
             ;;
             -w | --watch)
@@ -143,7 +151,9 @@ if [ -n "$1" ]; then
                 shift
             ;;
             -n | --new)
-                if [ -z "$2" ]; then
+                input=$2
+                
+                if [ -z "${input// /_}" ]; then
                     echo -e "\033[1;31mCreating a new project requires a project name.\033[0m"
                     exit 1
                 fi
@@ -153,13 +163,13 @@ if [ -n "$1" ]; then
                     exit 1
                 fi
                 
-                if [ -f "$2" ]; then
+                if [ -f "${input// /_}" ]; then
                     echo -e "\033[1;31mIt seems like your directory already exists.\033[0m"
                     exit 1
                 fi
-                mkdir "$2"
-                cd "$2" || {  echo -e "\033[1;31mCreating $2 failed: Cd returned an error.\033[0m" && exit 1; }
-                init "$3" || { cd ".." &&  rm -rf "$2" && echo -e "\033[1;31mCreating $2 failed: init returned an error.\n\033[1;34mAll changes were reverted.\033[0m" && exit 1; }
+                mkdir "${input// /_}"
+                cd "${input// /_}" || {  echo -e "\033[1;31mCreating ${input// /_} failed: Cd returned an error.\033[0m" && exit 1; }
+                init "$3" || { cd ".." &&  rm -rf "${input// /_}" && echo -e "\033[1;31mCreating ${input// /_} failed: init returned an error.\n\033[1;34mAll changes were reverted.\033[0m" && exit 1; }
                 build "main.tex" "silent"
                 # cd ..
                 echo -e "\033[1;32mSuccessfully created a new Schoolnotes project for\033[0m \033[1;35m$3.\033[0m"
