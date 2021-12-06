@@ -55,7 +55,6 @@ clean() {
 
 build() {
     echo -e "\033[1;34mBuilding main.tex...\033[0m"
-    mkdir out
     if [ "$2" = "silent" ]; then
         lualatex  --halt-on-error "$1" > /dev/null || { echo -e "\033[1;31mBuilding of $1 failed.\033[0m" && exit 1; }
     else
