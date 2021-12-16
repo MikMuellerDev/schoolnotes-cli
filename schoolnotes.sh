@@ -14,12 +14,12 @@ init() {
             cp -r /opt/schoolnotes/.templates/math/* ./ ||  { echo -e "\033[1;31mTemplates folder ist not valid, initialising failed.\033[0m" && exit 1; }
             echo -e "\033[1;32mSuccessfully initialised new Schoolnotes template for\033[0m \033[1;35mMath.\033[0m"
         ;;
-        i | info)
-            cp -r /opt/schoolnotes/.templates/informatik/* ./ ||  { echo -e "\033[1;31mTemplates folder ist not valid, initialising failed.\033[0m" && exit 1; }
+        i | it)
+            cp -r /opt/schoolnotes/.templates/it/* ./ ||  { echo -e "\033[1;31mTemplates folder ist not valid, initialising failed.\033[0m" && exit 1; }
             echo -e "\033[1;32mSuccessfully initialised new Schoolnotes template for\033[0m \033[1;35mIT.\033[0m"
         ;;
         *)
-            echo -e "\033[1;31mPlease provide a valid template name when using init.\033[0m\nValid templates are:\n    n | normal\n    c | complex\n    m | math\033[0m"
+            echo -e "\033[1;31mPlease provide a valid template name when using init.\033[0m\nValid templates are:\n    n | normal\n    c | complex\n    m | math \n    i | it\033[0m"
             false
         ;;
     esac
