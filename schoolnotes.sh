@@ -1,13 +1,5 @@
 #!/bin/bash
 
-maketitle() {
-    echo -e "$1"
-    echo -e "$2"
-    
-    read filename ;
-    sed -i 's/ /_/g' "$filename"
-}
-
 init() {
     case "$1" in
         n | normal)
@@ -24,7 +16,7 @@ init() {
         ;;
         i | info)
             cp -r /opt/schoolnotes/.templates/informatik/* ./ ||  { echo -e "\033[1;31mTemplates folder ist not valid, initialising failed.\033[0m" && exit 1; }
-            echo -e "\033[1;32mSuccessfully initialised new Schoolnotes template for\033[0m \033[1;35mComputer C.\033[0m"
+            echo -e "\033[1;32mSuccessfully initialised new Schoolnotes template for\033[0m \033[1;35mIT.\033[0m"
         ;;
         *)
             echo -e "\033[1;31mPlease provide a valid template name when using init.\033[0m\nValid templates are:\n    n | normal\n    c | complex\n    m | math\033[0m"
@@ -35,9 +27,9 @@ init() {
 
 clean() {
     rm -v -- *.aux 2> /dev/null
+    rm -v -- *.out 2> /dev/null
     rm -v -- *.fdb_latexmk 2> /dev/null
     rm -v -- *.fls 2> /dev/null
-    rm -rvf -- *.out 2> /dev/null
     rm -v -- *.synctex.gz 2> /dev/null
     rm -v -- *.log 2> /dev/null
     rm -v -- *.lof 2> /dev/null
@@ -49,6 +41,23 @@ clean() {
     rm -v -- *.bak1 2> /dev/null
     rm -v -- *.lol 2> /dev/null
     rm -v -- *.listing 2> /dev/null
+    rm __latexindent_temp.tex 2> /dev/null
+
+    rm -v -- **/*.aux 2> /dev/null
+    rm -v -- **/*.out 2> /dev/null
+    rm -v -- **/*.fdb_latexmk 2> /dev/null
+    rm -v -- **/*.fls 2> /dev/null
+    rm -v -- **/*.synctex.gz 2> /dev/null
+    rm -v -- **/*.log 2> /dev/null
+    rm -v -- **/*.lof 2> /dev/null
+    rm -v -- **/*.bbl 2> /dev/null
+    rm -v -- **/*.bcf 2> /dev/null
+    rm -v -- **/*.script 2> /dev/null
+    rm -v -- **/*.dat 2> /dev/null
+    rm -v -- **/*.bak0 2> /dev/null
+    rm -v -- **/*.bak1 2> /dev/null
+    rm -v -- **/*.lol 2> /dev/null
+    rm -v -- **/*.listing 2> /dev/null
     rm __latexindent_temp.tex 2> /dev/null
     echo -e "\033[1;34mCleaned LaTeX junk files in current directory.\033[0m"
 }

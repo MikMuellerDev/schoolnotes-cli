@@ -1,0 +1,50 @@
+% --- Listing I ---
+\boxedinputlisting[style=Java, caption=Hello World, label=lst:java2]{code/Main.java}
+
+% --- Listing II ---
+\begin{boxedlisting}[style=Rust, caption=Rust Hello World, nolol=false]
+	pub fn main() {
+		print!("Hello World!")
+	}
+\end{boxedlisting}
+
+% --- Flowchart ---
+\begin{center}
+	\begin{tikzpicture}[node distance=2cm]
+		\node (list) [startstop] {List};
+
+		\node (current) [process, below of=list, yshift=-0.5cm] {Node 2};
+		\node (first) [process, left of=current, xshift=-3cm] {Node 1};
+		\node (last) [process, right of=current, xshift=3cm] {Node 3};
+		\node (nll1) [txt, left of=first, xshift=-1.5cm] {\texttt{\color{_red}{NULL}}};
+		\node (nll2) [txt, right of=last, xshift=1.5cm] {\texttt{\color{_red}{NULL}}};
+
+		\draw [arrow] (first) -- node[anchor=south] {next} (current);
+		\draw [arrow] (current) -- node[anchor=south] {next} (last);
+		\draw [arrow] (last) -- node[anchor=south] {next} (nll2);
+		\draw [arrow] (nll1) -- node[anchor=south] {next} (first);
+		\draw [arrow] (list) -- node[anchor=west] {\texttt{\color{_blue}{current}}} (current);
+		\draw [arrow] (list) -| node[anchor=south] {first} (first);
+		\draw [arrow] (list) -| node[anchor=south] {last} (last);
+	\end{tikzpicture}
+\end{center}
+
+% --- Tables ---
+\begin{tabularx}{\linewidth}[h]{|>{\columncolor{gray!40}}C|C|C|C|C|C|C|C|C|C|C|C|C|C|C|C|C|C|}
+	\hline
+	\rowcolor{gray!40} & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 & 13 & 14 & 15 & 16 & 17 \\ \hline
+	1.                 & A & B & C & D & E & F & G & H & I & J  & K  & L  & M  & N  & O  & P  & Q  \\ \hline
+	2.                 &   & B & C & D & E & F & G & H & I & J  & K  & L  & M  & N  & O  & P  & Q  \\ \hline
+	3.                 &   &   & C & D & E & F & G & H & I & J  & K  & L  & M  & N  & O  & P  & Q  \\ \hline
+	4.                 &   &   &   & D & E & F & G & H & I & J  & K  & L  & M  & N  & O  & P  & Q  \\ \hline
+	5.                 &   &   &   &   & E & F & G & H & I & J  & K  & L  & M  & N  & O  & P  & Q  \\ \hline
+	6.                 &   &   &   &   &   & F & G & H & I & J  & K  & L  & M  & N  & O  & P  & Q  \\ \hline
+	7.                 &   &   &   &   &   &   & G & H & I & J  & K  & L  & M  & N  & O  & P  & Q  \\ \hline
+\end{tabularx}
+
+% --- Bullet Point ---
+\begin{itemize}
+	\item A
+	\item B
+	\item C
+\end{itemize}
