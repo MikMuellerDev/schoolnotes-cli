@@ -3,19 +3,19 @@
 init() {
     case "$1" in
         n | normal)
-            cp -r /opt/schoolnotes/.templates/normal/* ./|| { echo -e "\033[1;31mTemplates folder ist not valid, initialising failed.\033[0m" && exit 1; }
+            cp -r /opt/schoolnotes/templates/normal/* ./|| { echo -e "\033[1;31mTemplates folder ist not valid, initialising failed.\033[0m" && exit 1; }
             echo -e "\033[1;32mSuccessfully initialised new Schoolnotes template for\033[0m \033[1;35mNotes.\033[0m"
         ;;
         c | complex)
-            cp -r /opt/schoolnotes/.templates/complex/* ./ || { echo -e "\033[1;31mTemplates folder ist not valid, initialising failed.\033[0m" && exit 1; }
+            cp -r /opt/schoolnotes/templates/complex/* ./ || { echo -e "\033[1;31mTemplates folder ist not valid, initialising failed.\033[0m" && exit 1; }
             echo -e "\033[1;32mSuccessfully initialised new Schoolnotes template for\033[0m \033[1;35mComplex Work.\033[0m"
         ;;
         m | math)
-            cp -r /opt/schoolnotes/.templates/math/* ./ ||  { echo -e "\033[1;31mTemplates folder ist not valid, initialising failed.\033[0m" && exit 1; }
+            cp -r /opt/schoolnotes/templates/math/* ./ ||  { echo -e "\033[1;31mTemplates folder ist not valid, initialising failed.\033[0m" && exit 1; }
             echo -e "\033[1;32mSuccessfully initialised new Schoolnotes template for\033[0m \033[1;35mMath.\033[0m"
         ;;
         i | it)
-            cp -r /opt/schoolnotes/.templates/it/* ./ ||  { echo -e "\033[1;31mTemplates folder ist not valid, initialising failed.\033[0m" && exit 1; }
+            cp -r /opt/schoolnotes/templates/it/* ./ ||  { echo -e "\033[1;31mTemplates folder ist not valid, initialising failed.\033[0m" && exit 1; }
             echo -e "\033[1;32mSuccessfully initialised new Schoolnotes template for\033[0m \033[1;35mIT.\033[0m"
         ;;
         *)
@@ -42,7 +42,7 @@ clean() {
     rm -v -- *.lol 2> /dev/null
     rm -v -- *.listing 2> /dev/null
     rm __latexindent_temp.tex 2> /dev/null
-
+    
     rm -v -- **/*.aux 2> /dev/null
     rm -v -- **/*.out 2> /dev/null
     rm -v -- **/*.fdb_latexmk 2> /dev/null
