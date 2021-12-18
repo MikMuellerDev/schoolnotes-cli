@@ -72,7 +72,12 @@ clean() {
     rm -v -- **/*.lol 2> /dev/null
     rm -v -- **/*.listing 2> /dev/null
     rm __latexindent_temp.tex 2> /dev/null
-    echo -e "\033[1;34mCleaned LaTeX junk files in current directory.\033[0m"
+    if [ "$1" = "buildmode" ]; then
+        sleep 0s
+    else
+        rm main.pdf 2> /dev/null
+        echo -e "\033[1;34mCleaned LaTeX junk files in current directory.\033[0m"
+    fi
 }
 
 build() {
@@ -82,7 +87,7 @@ build() {
     else
         lualatex  --halt-on-error "$1" || { echo -e "\033[1;31mBuilding of $1 failed.\033[0m" && exit 1; }
     fi
-    clean > /dev/null
+    clean "buildmode" > /dev/null
     echo -e "\033[1;32mBuilding of $1 finished.\033[0m"
 }
 
@@ -183,7 +188,7 @@ if [ -n "$1" ]; then
                         [Yy]* )
                             curl -fsSl https://raw.githubusercontent.com/MikMuellerDev/schoolnotes-cli/main/install.sh > install-schoolnotes.sh
                             sudo bash install-schoolnotes.sh r > /dev/null
-                            sudo bash install-schoolnotes.sh i 
+                            sudo bash install-schoolnotes.sh i
                             echo -e "\033[1;32mSuccessfully updated\033[0m \033[1;35mSchoolNotes\033[0m"
                             rm install-schoolnotes.sh
                             break
