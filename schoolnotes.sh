@@ -165,6 +165,12 @@ if [ -n "$1" ]; then
                 code . 2> /dev/null || codium .
                 shift
             ;;
+             -u | --update)
+                wget https://raw.githubusercontent.com/MikMuellerDev/schoolnotes-cli/main/install.sh
+                sudo bash install.sh r
+                sudo bash install.sh i
+                shift
+            ;;
             -w | --watch)
                 echo -e "\033[1;34mWatching for filechanges in current directory.\033[0m"
                 watch
