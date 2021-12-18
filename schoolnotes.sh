@@ -4,6 +4,7 @@ init() {
     case "$1" in
         n | normal)
             cp -r /opt/schoolnotes/templates/normal/* ./|| { echo -e "\033[1;31mTemplates folder ist not valid, initialising failed.\033[0m" && exit 1; }
+            cp /opt/schoolnotes/templates/normal/.gitignore .
             echo -e "\033[1;32mSuccessfully initialised new Schoolnotes template for\033[0m \033[1;35mNotes.\033[0m"
         ;;
         c | complex)
@@ -12,10 +13,12 @@ init() {
         ;;
         m | math)
             cp -r /opt/schoolnotes/templates/math/* ./ ||  { echo -e "\033[1;31mTemplates folder ist not valid, initialising failed.\033[0m" && exit 1; }
+            cp /opt/schoolnotes/templates/math/.gitignore .
             echo -e "\033[1;32mSuccessfully initialised new Schoolnotes template for\033[0m \033[1;35mMath.\033[0m"
         ;;
         i | it)
             cp -r /opt/schoolnotes/templates/it/* ./ ||  { echo -e "\033[1;31mTemplates folder ist not valid, initialising failed.\033[0m" && exit 1; }
+            cp /opt/schoolnotes/templates/it/.gitignore .
             echo -e "\033[1;32mSuccessfully initialised new Schoolnotes template for\033[0m \033[1;35mIT.\033[0m"
         ;;
         *)
@@ -69,7 +72,7 @@ build() {
     else
         lualatex  --halt-on-error "$1" || { echo -e "\033[1;31mBuilding of $1 failed.\033[0m" && exit 1; }
     fi
-    clean
+    clean > /dev/null
     echo -e "\033[1;32mBuilding of $1 finished.\033[0m"
 }
 
@@ -175,12 +178,33 @@ if [ -n "$1" ]; then
                     echo -e "\033[1;31mIt seems like your directory already exists.\033[0m"
                     exit 1
                 fi
-                mkdir "${input// /_}"
+                mkdir "${input// /_}" || exit 1
                 cd "${input// /_}" || {  echo -e "\033[1;31mCreating ${input// /_} failed: Cd returned an error.\033[0m" && exit 1; }
                 init "$3" || { cd ".." &&  rm -rf "${input// /_}" && echo -e "\033[1;31mCreating ${input// /_} failed: init returned an error.\n\033[1;34mAll changes were reverted.\033[0m" && exit 1; }
+                printf '\n\def\documenttitle{%s}' "$2" >> ./preamble/config.tex
                 build "main.tex" "silent"
-                # cd ..
+                
+                if [ -z "$4" ]; then
+                    echo -e "\033[1;34mRunning in headless mode: Use \033[1;35m '-o' or '--open'\033[0m \033[1;34mto open the notebook after creation.\033[0m"
+                else
+                    case $4 in
+                        -o | --open)
+                            echo -e "\033[1;34mLaunching new notebook in VSCode.\033[0m"
+                            echo -e "\033[1;34m"
+                            echo " ___     _             _ _  _     _"
+                            echo "/ __| __| |_  ___  ___| | \| |___| |_ ___ ___"
+                            echo "\__ \/ _| ' \/ _ \/ _ \ | . / _ \  _/ -_|_--<"
+                            echo "|___/\__|_||_\___/\___/_|_|\_\___/\__\___/__/"
+                            echo -e "\033[0m"
+                            code .
+                        ;;
+                        *)
+                            echo -e "Expected -o | --open \n\033[1;31mUnknown option: $4.\033[0m"
+                    esac
+                fi
+                
                 echo -e "\033[1;32mSuccessfully created a new Schoolnotes project for\033[0m \033[1;35m$3.\033[0m"
+                shift
                 shift
                 shift
                 shift
@@ -195,7 +219,7 @@ else
     echo -e "\033[1;34mLaunching Schoolnotes in VSCode.\033[0m"
     code "$HOME/SchoolNotes"
     echo -e "\033[1;34m"
-    echo "___     _             _ _  _     _"
+    echo " ___     _             _ _  _     _"
     echo "/ __| __| |_  ___  ___| | \| |___| |_ ___ ___"
     echo "\__ \/ _| ' \/ _ \/ _ \ | . / _ \  _/ -_|_--<"
     echo "|___/\__|_||_\___/\___/_|_|\_\___/\__\___/__/"
