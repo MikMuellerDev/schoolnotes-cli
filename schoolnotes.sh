@@ -1,6 +1,14 @@
 #!/bin/bash
 AUTHOR="Mik_Mueller"
 
+logo() {
+    echo -e "\033[1;34m"
+    echo " ___     _             _ _  _     _"
+    echo "/ __| __| |_  ___  ___| | \| |___| |_ ___ ___"
+    echo "\__ \/ _| ' \/ _ \/ _ \ | . / _ \  _/ -_|_--<"
+    echo "|___/\__|_||_\___/\___/_|_|\_\___/\__\___/__/"
+    echo -e "\033[0m"
+}
 
 init() {
     case "$1" in
@@ -165,10 +173,24 @@ if [ -n "$1" ]; then
                 code . 2> /dev/null || codium .
                 shift
             ;;
-             -u | --update)
-                wget https://raw.githubusercontent.com/MikMuellerDev/schoolnotes-cli/main/install.sh
-                sudo bash install.sh r
-                sudo bash install.sh i
+            -u | --update)
+                echo -e "\033[1;31mUpdating SchoolNotes will remove your templates.\033[0m"
+                echo -e "If you want to keep them, backup your templates. You can find them in \033[1;34m/opt/schoolnotes/templates\033[0m."
+                echo -e "\033[1;35mNote: Some updates of Schoolnotes involve changes to templates.\n-> Be aware that your old templates might not work in a newer version.\033[0m"
+                while true; do
+                    read -p  "Do you want to remove all templates and continue the update? [N/y]" yn
+                    case $yn in
+                        [Yy]* )
+                            wget https://raw.githubusercontent.com/MikMuellerDev/schoolnotes-cli/main/install.sh
+                            sudo bash install.sh r
+                            sudo bash install.sh i
+                            break
+                        ;;
+                        * )
+                            echo -e "\033[1;34mUpdate canceled by user.\033[0m"
+                        exit 1;;
+                    esac
+                done
                 shift
             ;;
             -w | --watch)
@@ -206,12 +228,6 @@ if [ -n "$1" ]; then
                     case $4 in
                         -o | --open)
                             echo -e "\033[1;34mLaunching new notebook in VSCode.\033[0m"
-                            echo -e "\033[1;34m"
-                            echo " ___     _             _ _  _     _"
-                            echo "/ __| __| |_  ___  ___| | \| |___| |_ ___ ___"
-                            echo "\__ \/ _| ' \/ _ \/ _ \ | . / _ \  _/ -_|_--<"
-                            echo "|___/\__|_||_\___/\___/_|_|\_\___/\__\___/__/"
-                            echo -e "\033[0m"
                             code .
                         ;;
                         *)
@@ -234,10 +250,5 @@ if [ -n "$1" ]; then
 else
     echo -e "\033[1;34mLaunching Schoolnotes in VSCode.\033[0m"
     code "$HOME/SchoolNotes"
-    echo -e "\033[1;34m"
-    echo " ___     _             _ _  _     _"
-    echo "/ __| __| |_  ___  ___| | \| |___| |_ ___ ___"
-    echo "\__ \/ _| ' \/ _ \/ _ \ | . / _ \  _/ -_|_--<"
-    echo "|___/\__|_||_\___/\___/_|_|\_\___/\__\___/__/"
-    echo -e "\033[0m"
+    logo
 fi

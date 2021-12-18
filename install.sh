@@ -4,7 +4,17 @@ then echo -e "\033[1;31mPlease run this script as root.\033[0m"
     exit
 fi
 
+logo() {
+    echo -e "\033[1;34m"
+    echo " ___     _             _ _  _     _"
+    echo "/ __| __| |_  ___  ___| | \| |___| |_ ___ ___"
+    echo "\__ \/ _| ' \/ _ \/ _ \ | . / _ \  _/ -_|_--<"
+    echo "|___/\__|_||_\___/\___/_|_|\_\___/\__\___/__/"
+    echo -e "\033[0m"
+}
+
 install() {
+    logo
     cd /opt || { echo -e "\033[1;31mCould not access /opt directory. (Maybe check permissions?)\033[0m" && exit 1; }
     if [ -d "schoolnotes" ]; then
         which schoolnotes || { uninstall && install && exit 0; }

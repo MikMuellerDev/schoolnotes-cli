@@ -18,6 +18,7 @@ Schoolnotes-Cli is a bash script which intents to make using $\LaTeX$ easier and
 | Compiling the `main.tex` entry-point to a `.pdf` file                                    | `-b or --build`                                                              |
 | Watching for filechanges and compiling if they are any                                   | `-w or --watch`                                                              |
 | Viewing the `main.pdf`                                                                   | `-v or --view`                                                               |
+| Updating SchoolNotes to the current version                                              | `-u or --update`                                                             |
 | Editing in the current directory                                                         | `-e or --edit`                                                               |
 | Automatically renaming `main.pdf` like the current notebook, including the author's name | `-r or --rename`                                                             |
 | Editing in the `~/SchoolNotes` directory                                                 | `schoolnotes`    (no arguments)                                              |
