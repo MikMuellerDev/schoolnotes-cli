@@ -1,4 +1,6 @@
 #!/bin/bash
+AUTHOR="Mik_Mueller"
+
 
 init() {
     case "$1" in
@@ -146,9 +148,16 @@ if [ -n "$1" ]; then
                 view
                 shift
             ;;
-            -r | --run)
-                build "main.tex" "silent"
-                view
+            -r | --rename)
+                if [ -f "main.pdf" ]; then
+                    mv main.pdf "$(basename "$(pwd)")_$AUTHOR".pdf
+                else
+                    echo -e "\033[1;33m'main.pdf' not found, running build before renaming.\033[0m"
+                    build "main.tex" "silent"
+                    mv main.pdf "$(basename "$(pwd)")_$AUTHOR".pdf
+                fi
+                clean
+                echo -e "\033[1;32mSuccessfully renamed 'main.pdf' to\033[0m \033[1;35m$(basename "$(pwd)")_$AUTHOR.pdf\033[0m"
                 shift
             ;;
             -e | --edit)

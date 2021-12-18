@@ -10,16 +10,18 @@ Schoolnotes-Cli is a bash script which intents to make using $\LaTeX$ easier and
 
 ### Features
 
-| Feature                                                       | CLI command                                                                  |
-| ------------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| Creating a new notebook in the current directory              | `-i or --init [template]`                                                    |
-| Creating a new notebook with a custom name in a new directory | `-i or --init [name] [template]` optional: `-o or --open` to edit right away |
-| Removing temporary files from the current directory           | `-c or --clean`                                                              |
-| Compiling the `main.tex` entry-point to a `.pdf` file         | `-b or --build`                                                              |
-| Watching for filechanges and compiling if they are any        | `-w or --watch`                                                              |
-| Viewing the `main.pdf`                                        | `-v or --view`                                                               |
-| Editing in the current directory                              | `-e or --edit`                                                               |
-| Editing in the `~/SchoolNotes` directory                      | `schoolnotes`    (no arguments)                                              |
+| Feature                                                                                  | CLI command                                                                  |
+| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| Creating a new notebook in the current directory                                         | `-i or --init [template]`                                                    |
+| Creating a new notebook with a custom name in a new directory                            | `-i or --init [name] [template]` optional: `-o or --open` to edit right away |
+| Removing temporary files from the current directory                                      | `-c or --clean`                                                              |
+| Compiling the `main.tex` entry-point to a `.pdf` file                                    | `-b or --build`                                                              |
+| Watching for filechanges and compiling if they are any                                   | `-w or --watch`                                                              |
+| Viewing the `main.pdf`                                                                   | `-v or --view`                                                               |
+| Editing in the current directory                                                         | `-e or --edit`                                                               |
+| Automatically renaming `main.pdf` like the current notebook, including the author's name | `-r or --rename`                                                             |
+| Editing in the `~/SchoolNotes` directory                                                 | `schoolnotes`    (no arguments)                                              |
+
 
 
 
