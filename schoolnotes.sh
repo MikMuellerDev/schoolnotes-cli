@@ -221,7 +221,8 @@ if [ -n "$1" ]; then
                 cd "${input// /_}" || {  echo -e "\033[1;31mCreating ${input// /_} failed: Cd returned an error.\033[0m" && exit 1; }
                 init "$3" || { cd ".." &&  rm -rf "${input// /_}" && echo -e "\033[1;31mCreating ${input// /_} failed: init returned an error.\n\033[1;34mAll changes were reverted.\033[0m" && exit 1; }
                 # printf '\n\def\documenttitle{%s}' "$2" >> ./preamble/config.tex
-                sed -i -E "s/Thema/$2/" ./preamble/config.tex
+                title="${2//_/ }"
+                sed -i -E "s/Thema/$title/" ./preamble/config.tex
                 build "main.tex" "silent"
                 
                 if [ -z "$4" ]; then
