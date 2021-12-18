@@ -181,9 +181,11 @@ if [ -n "$1" ]; then
                     read -p  "Do you want to remove all templates and continue the update? [N/y]" yn
                     case $yn in
                         [Yy]* )
-                            wget https://raw.githubusercontent.com/MikMuellerDev/schoolnotes-cli/main/install.sh
-                            sudo bash install.sh r
-                            sudo bash install.sh i
+                            curl -fsSl https://raw.githubusercontent.com/MikMuellerDev/schoolnotes-cli/main/install.sh > install-schoolnotes.sh
+                            sudo bash install-schoolnotes.sh r > /dev/null
+                            sudo bash install-schoolnotes.sh i 
+                            echo -e "\033[1;32mSuccessfully updated\033[0m \033[1;35mSchoolNotes\033[0m"
+                            rm install-schoolnotes.sh
                             break
                         ;;
                         * )

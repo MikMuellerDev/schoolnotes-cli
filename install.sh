@@ -7,14 +7,17 @@ fi
 logo() {
     echo -e "\033[1;34m"
     echo " ___     _             _ _  _     _"
+    sleep 0.1s
     echo "/ __| __| |_  ___  ___| | \| |___| |_ ___ ___"
+    sleep 0.1s
     echo "\__ \/ _| ' \/ _ \/ _ \ | . / _ \  _/ -_|_--<"
+    sleep 0.1s
     echo "|___/\__|_||_\___/\___/_|_|\_\___/\__\___/__/"
     echo -e "\033[0m"
+    sleep 0.1s
 }
 
 install() {
-    logo
     cd /opt || { echo -e "\033[1;31mCould not access /opt directory. (Maybe check permissions?)\033[0m" && exit 1; }
     if [ -d "schoolnotes" ]; then
         which schoolnotes || { uninstall && install && exit 0; }
@@ -46,6 +49,7 @@ uninstall() {
     echo -e "\033[1;32mSuccessfully uninstalled\033[0m \033[1;35mSchoolnotes-CLI.\033[0m"
 }
 
+logo
 case "$1" in
     i | install)
         install
