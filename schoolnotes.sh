@@ -31,6 +31,11 @@ init() {
             cp /opt/schoolnotes/templates/it/.gitignore .
             echo -e "\033[1;32mSuccessfully initialised new Schoolnotes template for\033[0m \033[1;35mIT.\033[0m"
         ;;
+        b | blank)
+            cp -r /opt/schoolnotes/templates/blank/* ./ ||  { echo -e "\033[1;31mTemplates folder ist not valid, initialising failed.\033[0m" && exit 1; }
+            cp /opt/schoolnotes/templates/blank/.gitignore .
+            echo -e "\033[1;32mSuccessfully initialised new Schoolnotes template for\033[0m \033[1;35mBlank.\033[0m"
+        ;;
         *)
             echo -e "\033[1;31mPlease provide a valid template name when using init.\033[0m\nValid templates are:\n    n | normal\n    c | complex\n    m | math \n    i | it\033[0m"
             false
