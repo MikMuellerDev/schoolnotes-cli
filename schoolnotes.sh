@@ -45,6 +45,10 @@ init() {
 
 clean() {
     rm -v -- *.aux 2> /dev/null
+    rm -v -- *.blg 2> /dev/null
+    rm -v -- *.lot 2> /dev/null
+    rm -v -- *.run.xml 2> /dev/null
+    rm -v -- *.toc 2> /dev/null
     rm -v -- *.out 2> /dev/null
     rm -v -- *.fdb_latexmk 2> /dev/null
     rm -v -- *.fls 2> /dev/null
